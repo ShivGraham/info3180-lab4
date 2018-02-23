@@ -73,8 +73,10 @@ def logout():
 
 @app.route('/files')
 def files():
-    
-	return render_template('files.html', image_list=get_uploaded_images())
+    if not session.get('logged_in'):
+        abort(401)
+        
+    return render_template('files.html', image_list=get_uploaded_images())
 	
 ###
 #  This function stores the names of the uploaded images in the uploads folder and returns them as a list

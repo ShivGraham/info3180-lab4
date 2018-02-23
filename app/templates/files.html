@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    {% include 'flash_messages.html' %}
+    
+    <ul>
+        {% for file in image_list %}
+            <li> <img src="{{ url_for('static', filename = 'uploads/' + file) }}" /> </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -71,6 +71,27 @@ def logout():
     return redirect(url_for('home'))
 
 
+@app.route('/files')
+def files():
+    
+	return render_template('files.html', image_list=get_uploaded_images())
+	
+###
+#  This function stores the names of the uploaded images in the uploads folder and returns them as a list
+###
+
+def get_uploaded_images():
+	rootdir = os.getcwd()
+	
+	file_list = []
+
+	for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
+		for file in files:
+		    name, ext = os.path.splitext(file)
+		    if ((ext == '.jpg') or (ext == '.jpeg') or (ext == '.png')):
+		        file_list.append(file)
+	return file_list
+
 ###
 # The functions below should be applicable to all Flask apps.
 ###
